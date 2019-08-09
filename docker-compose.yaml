@@ -12,19 +12,4 @@ services:
             - ./src:/app
         expose:
             - "5000"
-        ports:
-            - 5000:5000
-    load-tester-master:
-        image: ehsanfa/locustio
-        volumes:
-            - ./deploy/modules:/app
-        ports:
-            - 8089:8089
-            - 5557:5557
-        command: locust -f /app/load-test.py --host=http://authenticator --master
-    load-tester-slave:
-        image: ehsanfa/locustio
-        volumes:
-            - ./deploy/modules:/app
-        command: locust -f /app/load-test.py --host=http://authenticator --slave --master-host=load-tester-master
 
